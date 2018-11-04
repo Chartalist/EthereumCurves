@@ -21,11 +21,19 @@ htmllist = paste0(baseURL,tkplots)
 
 tks = stringr::str_extract(tkplots, "^[^.]+")
 
-tklist = paste0("[",tks,"]","(",htmllist,")")
+logoURL = "https://yitao416.github.io/onlinePlots/Archive/tokenLogo/"
+
+tk = tks[1]
+tklogo = list.files("C:\\Users\\tony\\Documents\\R_Projects\\EtherWeb\\static\\tokenLogo",tk)
+
+tklogoList= lapply(tks,function(x){list.files("C:\\Users\\tony\\Documents\\R_Projects\\EtherWeb\\static\\tokenLogo",x)})
+tklogofile = unlist(tklogoList)
+
+# tklist = paste0("[",tks,"]","(",htmllist,")")
+logoSize = "{width=150px}"
+tklist = paste0("[![",tks,"](",logoURL,tklogofile,")",logoSize,"]","(",htmllist,")")
 
 ```
 
-**`r tklist`**
-
-
+**`r paste(tklist,collapse="")`**
 
