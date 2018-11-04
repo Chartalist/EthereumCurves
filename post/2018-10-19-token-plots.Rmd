@@ -12,7 +12,7 @@ knitr::opts_chunk$set(collapse = TRUE)
 
 Here is a list of token plots with the rolling depth of betti numbers.
 
-```{r echo=FALSE}
+```{r echo=FALSE,message=FALSE,warning=FALSE}
 tkplots = list.files("C:\\Users\\tony\\Documents\\R_Projects\\EtherWeb\\tokenPlots")
 
 baseURL = "https://ethereumcurves.github.io/tokens/"
@@ -33,7 +33,21 @@ tklogofile = unlist(tklogoList)
 logoSize = "{width=150px}"
 tklist = paste0("[![",tks,"](",logoURL,tklogofile,")",logoSize,"]","(",htmllist,")")
 
+# convert to 5 columns
+
+numcol = 5
+length(tklist) = numcol * ceiling(length(tklist)/numcol)
+numtks = length(tklist)
+# 
+# tktable = data.frame(matrix(nrow = ceiling(numtks/numcol),ncol=numcol))
+# colnames(tktable) = paste0("tokenList_",1:numcol)
+
+tkmatrix = matrix(tklist,nrow = ceiling(numtks/numcol),ncol=numcol)
+
+tkstr = knitr::kable(tkmatrix, format = "markdown")
+
 ```
 
-**`r paste(tklist,collapse="")`**
+`r tkstr`
+
 
